@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Job</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="{% static 'css/add_job.css' %}">
+    
+    {% comment %} <style>
+        
+    </style> {% endcomment %}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <script>
+        $(function() {
+            $("#job_application_date, #job_posted_date").datepicker({
+                dateFormat: "yy-mm-dd"
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>Add New Job</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% for field in form %}
+            <div class="form-group">
+                <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+                {{ field }}
+                {% if field.help_text %}
+                    <small class="form-text text-muted">{{ field.help_text }}</small>
+                {% endif %}
+                {% for error in field.errors %}
+                    <small class="form-text text-danger">{{ error }}</small>
+                {% endfor %}
+            </div>
+        {% endfor %}
+        <button type="submit" class="button-56" role="button">
+            <span class="text">Add Job</span>
+        </button>
+    </form>
+</body>
+</html>
