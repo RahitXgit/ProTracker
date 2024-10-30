@@ -1,0 +1,15 @@
+{% load static %}
+<nav>
+  <ul>
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="{% url 'add_job' %}">Add Job</a></li>
+    <li><a href="{% url 'accepted_jobs' %}">Accepted</a></li>
+    <li><a href="{% url 'rejected_jobs' %}">Rejected</a></li>
+  </ul>
+</nav>
+{% comment %} 
+path('add-job/', add_job, name='add_job'),
+    path('delete-job/<int:job_id>/', delete_job, name='delete_job'),
+    path('update-status/<int:job_id>/<str:status>/', update_status, name='update_status'),
+    path('accepted-jobs/', accepted_jobs, name='accepted_jobs'),
+    path('rejected-jobs/', rejected_jobs, name='rejected_jobs'), {% endcomment %}

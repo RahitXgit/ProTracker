@@ -1,17 +1,91 @@
-{% load static %}
-
+{%load static%}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jobs Table</title>
-    {% comment %} <link rel="stylesheet" href="{% static 'css/styles.css' %}"> {% endcomment %}
-    <link rel="stylesheet" href="{% static 'css/home.css' %}">
-    <script src="https://kit.fontawesome.com/87f5786191.js" crossorigin="anonymous"></>
+    <script src="https://kit.fontawesome.com/87f5786191.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Radley:ital@0;1&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
+    {% comment %} <style
+        
+    </style> {% endcomment %}
+
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    {% comment %} <nav>
+        {% load static %}
+        <header>
+    <img src="{% static 'img/logo.png' %}" />
+</header> {% endcomment %}
+{% comment %} <nav>
+  <ul>
+    <li><a href="{% url 'home' %}">Home</a></li>
+    <li><a href="{% url 'add_job' %}">Add Job</a></li>
+    <li><a href="{% url 'menu' %}">Menu</a></li>
+    <li><a href="{% url 'book' %}">Book</a></li>
+  </ul>
+</nav> {% endcomment %}
+        {% comment %} </div> {% endcomment %}
+    
+    {% comment %} {% include "partials/_header.html" %} {% endcomment %}
+        <div class="container">
+        <h1>JOBS TABLE</h1>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Application Date</th>
+                        <th>Role</th>
+                        <th>Type</th>
+                        <th>Company Name</th>
+                        <th>Application Link</th>
+                        <th>Posted Date</th>
+                        <th>Application Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if jobs %}
+                    {% for job in jobs %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ job.job_application_date }}</td>
+                        <td>{{ job.job_title}}</td>
+                        <td>{{ job.job_type}}</td>
+                        <td>{{ job.company_name}}</td>
+                        <td style="text-align:center;"><a href="{{ job.applied_link }}" class="link-button" target="_blank" rel="noopener noreferrer">View</a></td>
+                        <td>{{ job.job_posted_date}}</td>
+                        <td>
+                            {% if job.job_status == 'accepted' %}
+                                <span style="color: green;"><i class="fa-solid fa-circle-check" style="color: #1a7a25;"></i></span>
+                            {% elif job.job_status == 'rejected' %}
+                                <span style="color: red;"><i class="fa-solid fa-circle-xmark" style="color: #fe1616;"></i></span>
+                                {% else %}
+                                <span onclick="updateStatus({{ job.id }}, 'accepted')" style="cursor: pointer; color: green;"><i class="fa-solid fa-circle-check" style="color: #1a7a25;"></i></span>
+                                <span onclick="updateStatus({{ job.id }}, 'rejected')" style="cursor: pointer; color: red;"><i class="fa-solid fa-circle-xmark" style="color: #fe1616;"></i></span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <button onclick="confirmDelete({{ job.id }})"><i class="fa-solid fa-trash-can" style="color: #5d2f09;"></i></button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        {% else %}
+                        <tr>
+                            <td colspan="9" style="text-align: center;">No data found</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+        <button class="button-54" onclick="window.location.href='/add-job/'">Add Job</button>
+    </div>
+    
     <script>
         function confirmDelete(id) {
             if (confirm("Are you sure you want to delete this job application?")) {
@@ -23,50 +97,5 @@
             window.location.href = `/update-status/${id}/${status}/`;
         }
     </script>
-</head>
-<body>
-    <h1>JOBS TABLE</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>No.</th>
-                <th>Application Date</th>
-                <th>Role</th>
-                <th>Type</th>
-                <th>Company Name</th>
-                <th>Application Link</th>
-                <th>Posted Date</th>
-                <th>Application Status</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for job in jobs %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ job.job_application_date }}</td>
-                <td>{{ job.job_title}}</td>
-                <td>{{ job.job_type}}</td>
-                <td>{{ job.company_name}}</td>
-                <td style = "text-align:center;"><a href="{{ job.job.applied_link }}" class="link-button" target="_blank" rel="noopener noreferrer">View</a></td>
-                <td>{{ job.job_posted_date}}</td>
-                <td>
-                    {% if job.job_status == 'accepted' %}
-                        <span style="color: green;"><i class="fa-solid fa-circle-check" style="color: #1a7a25;"></i></span>
-                    {% elif job.job_status == 'rejected' %}
-                        <span style="color: red;"><i class="fa-solid fa-circle-xmark" style="color: #fe1616;"></i></span>
-                    {% else %}
-                        <span onclick="updateStatus({{ job.id }}, 'accepted')" style="cursor: pointer; color: green;"><i class="fa-solid fa-circle-check" style="color: #1a7a25;"></i></span>
-                        <span onclick="updateStatus({{ job.id }}, 'rejected')" style="cursor: pointer; color: red;"><i class="fa-solid fa-circle-xmark" style="color: #fe1616;"></i></span>
-                    {% endif %}
-                </td>
-                <td>
-                    <button onclick="confirmDelete({{ job.id }})"><i class="fa-solid fa-trash-can" style="color: #5d2f09;"></i></button>
-                </td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-    <button class="button-54" onclick="window.location.href='/add-job/'">Add Job</button>
 </body>
 </html>

@@ -12,7 +12,12 @@ body {
 }
 h1 {
     text-align: center;
-    color: #2c3e50;
+    /* margin-bottom: 20px; */
+    /* .radley-regular { */
+    font-family: 'Radley', serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 50px;
 }
 form {
     background-color: #fff;

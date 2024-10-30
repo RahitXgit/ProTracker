@@ -100,10 +100,13 @@
             border-bottom-right-radius: 8px;
         }
     </style> {% endcomment %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Radley:ital@0;1&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <h1>ACCEPTED JOBS APPLICATIONS</h1>
     <table>
-        <caption>Accepted Job Applications</caption>
         <thead>
             <tr>
                 <th>No.</th>
@@ -116,6 +119,7 @@
             </tr>
         </thead>
         <tbody>
+            {% if jobs %}
             {% for job in jobs %}
             <tr>
                 <td>{{ forloop.counter }}</td>
@@ -127,6 +131,11 @@
                 <td>{{ job.job.job_posted_date }}</td>
             </tr>
             {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="9" style="text-align: center;">No data found</td>
+            </tr>
+        {% endif %}
         </tbody>
     </table>
 </body>

@@ -10,3 +10,9 @@ class JobForm(forms.ModelForm):
             'job_application_date': forms.DateInput(attrs={'type': 'date'}),
             'job_posted_date': forms.DateInput(attrs={'type': 'date'}),
         }
+        optional_fields = ['job_posted_date']
+        
+        def __init__(self, *args, **kwargs):
+            super(JobForm, self).__init__(*args, **kwargs)
+            for field in self.Meta.optional_fields:
+                self.fields[field].required = False

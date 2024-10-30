@@ -6,8 +6,8 @@ class Jobs(models.Model):
     job_title = models.CharField(max_length=100, verbose_name="Role", null=False)
     
     JOB_TYPE_CHOICES = [
-        ('internship', 'Internship'),
-        ('job', 'Job'),
+        ('Internship', 'Internship'),
+        ('Job', 'Job'),
     ]
     
     job_type = models.CharField(
@@ -18,8 +18,8 @@ class Jobs(models.Model):
     )
     
     company_name = models.CharField(max_length=100, verbose_name="Company Name", null=False)
-    applied_link = models.URLField(max_length=200, verbose_name="Application Link", null=False)
-    job_posted_date = models.DateField(verbose_name="Job Posted Date")
+    applied_link = models.URLField(max_length=200, verbose_name="Application Link", null=True, blank=True)
+    job_posted_date = models.DateField(verbose_name="Job Posted Date", null=True, blank = True)
     
     JOB_STATUS_CHOICES = [
         ('accepted', 'Accepted'),

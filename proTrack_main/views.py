@@ -4,7 +4,7 @@ from .models import Jobs, AcceptedJobs, RejectedJobs
 from .forms import JobForm
 
 def home(request):
-    jobs = Jobs.objects.all()
+    jobs = Jobs.objects.all().order_by('job_application_date')
     return render(request, 'home.html', {'jobs': jobs})
 
 def add_job(request):
