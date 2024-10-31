@@ -133,39 +133,7 @@ tbody tr:hover {
     top: 5px;
     left: 5px;
 }
-nav {
-    background-color: #495E57;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    margin-bottom: 0px;
-}
 
-nav ul {
-    list-style: none;
-    font-size: 1.5rem;
-    text-align: center;
-    padding-inline-start: 0rem;
-    margin-bottom: 0px;
-}
-
-nav ul li {
-    display: inline-block;
-    margin: 0.5rem;
-}
-
-nav ul a {
-    color: #EDEFEE;
-    text-decoration: none;
-}
-
-nav ul a:active {
-    text-decoration: underline;
-}
-
-nav ul a:hover {
-    text-decoration: underline;
-    text-decoration-thickness: 0.1rem;
-}
 
 @media screen and (max-width: 600px) {
     table {

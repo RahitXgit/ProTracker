@@ -7,6 +7,43 @@
     <li><a href="{% url 'rejected_jobs' %}">Rejected</a></li>
   </ul>
 </nav>
+<style>
+  nav {
+    background-color: #495E57;
+    position: absolute; /* Position the navbar absolutely */
+    top: 0; /* Align to the top */
+    left: 0; /* Align to the left */
+    width: 100%; /* Make it full width */
+    padding: 10px 0; /* Add some padding */
+}
+
+nav ul {
+    list-style: none;
+    font-size: 1.5rem;
+    text-align: center;
+    padding-inline-start: 0rem;
+    margin: 0; /* Remove default margin */
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 0.5rem;
+}
+
+nav ul a {
+    color: #EDEFEE;
+    text-decoration: none;
+}
+
+nav ul a:active {
+    text-decoration: underline;
+}
+
+nav ul a:hover {
+    text-decoration: underline;
+    text-decoration-thickness: 0.1rem;
+}
+  </style>
 {% comment %} 
 path('add-job/', add_job, name='add_job'),
     path('delete-job/<int:job_id>/', delete_job, name='delete_job'),
