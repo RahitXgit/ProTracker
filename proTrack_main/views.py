@@ -38,4 +38,7 @@ def accepted_jobs(request):
 
 def rejected_jobs(request):
     jobs = RejectedJobs.objects.all()
-    return render(request, 'rejected_jobs.html', {'jobs': jobs})    
+    return render(request, 'rejected_jobs.html', {'jobs': jobs})   
+
+def none(request):
+    return render(request, 'none.html'); 
