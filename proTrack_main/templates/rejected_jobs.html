@@ -9,137 +9,51 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Radley:ital@0;1&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap" rel="stylesheet">
-    {% comment %} <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            margin-top: 20px;
-            background-color: #fff;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-            border-radius: 8px;
-            overflow: hidden;
-        }
-        caption {
-            font-size: 1.5em;
-            margin-bottom: 10px;
-            font-weight: bold;
-            color: #2c3e50;
-        }
-        th, td {
-            padding: 12px 15px;
-            text-align: left;
-        }
-        thead {
-            background-color: #34495e;
-            color: #fff;
-        }
-        thead tr:hover {
-            background-color: #34495e;
-        }
-        tbody tr:hover {
-            background-color: #e9ecef;
-        }
-        th {
-            font-weight: bold;
-            text-transform: uppercase;
-            font-size: 0.85em;
-            letter-spacing: 0.1em;
-        }
-        tr:nth-child(even) {
-            background-color: #f8f9fa;
-        }
-
-        td {
-            border-bottom: 1px solid #dee2e6;
-        }
-        tr:last-child td {
-            border-bottom: none;
-        }
-        .link-button {
-            display: inline-block;
-            padding: 6px 12px;
-            background-color: #3498db;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 4px;
-            transition: background-color 0.3s ease;
-        }
-        .link-button:hover {
-            background-color: #2980b9;
-        }
-        @media screen and (max-width: 600px) {
-            table {
-                font-size: 0.8em;
-            }
-            th, td {
-                padding: 8px 10px;
-            }
-            .link-button {
-                padding: 4px 8px;
-            }
-        }
-        th:first-child {
-            border-top-left-radius: 8px;
-        }
-
-        th:last-child {
-            border-top-right-radius: 8px;
-        }
-
-        tr:last-child td:first-child {
-            border-bottom-left-radius: 8px;
-        }
-
-        tr:last-child td:last-child {
-            border-bottom-right-radius: 8px;
-        }
-    </style> {% endcomment %}
 </head>
 <body>
-    {%include 'partials/_header.html' %}
-    <h1 style="font-weight: 300;
-    font-style: normal;
-    font-size: 40px;">REJECTED JOB APPLICATIONS</h1>
-    <table>
-        <thead>
-            <tr>
-                <th>No.</th>
-                <th>Application Date</th>
-                <th>Role</th>
-                <th>Type</th>
-                <th>Company Name</th>
-                <th>Application Link</th>
-                <th>Posted Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% if jobs %}
-            {% for job in jobs %}
-            <tr>
-                <td>{{ forloop.counter }}</td>
-                <td>{{ job.job.job_application_date }}</td>
-                <td>{{ job.job.job_title }}</td>
-                <td>{{ job.job.job_type }}</td>
-                <td>{{ job.job.company_name }}</td>
-                <td style = "text-align:center;"><a href="{{ job.job.applied_link }}" class="link-button" target="_blank" rel="noopener noreferrer">View</a></td>
-                <td>{{ job.job.job_posted_date }}</td>
-            </tr>
-            {% endfor %}
-            {% else %}
-            <tr>
-                <td colspan="9" style="text-align: center;">No data found</td>
-            </tr>
-        {% endif %}
-        </tbody>
-    </table>
+    {% include 'partials/_header.html' %}
+    <div class="content">
+        <h1>REJECTED JOB APPLICATIONS</h1>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>No.</th>
+                        <th>Application Date</th>
+                        <th>Role</th>
+                        <th>Type</th>
+                        <th>Company Name</th>
+                        <th>Application Link</th>
+                        <th>Posted Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% if jobs %}
+                    {% for job in jobs %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ job.job_application_date }}</td>
+                        <td>{{ job.job_title }}</td>
+                        <td>{{ job.job_type }}</td>
+                        <td>{{ job.company_name }}</td>
+                        <td>
+                            {% if job.applied_link %}
+                                <a href="{{ job.applied_link }}" target="_blank">View</a>
+                            {% else %}
+                                N/A
+                            {% endif %}
+                        </td>
+                        <td>{{ job.job_posted_date }}</td>
+                    </tr>
+                    {% endfor %}
+                    {% else %}
+                    <tr>
+                        <td colspan="7" style="text-align: center;">No data found</td>
+                    </tr>
+                    {% endif %}
+                </tbody>
+            </table>
+        </div>
+    </div>
 </body>
 </html>

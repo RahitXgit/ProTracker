@@ -124,17 +124,17 @@
             {% for job in jobs %}
             <tr>
                 <td>{{ forloop.counter }}</td>
-                <td>{{ job.job.job_application_date }}</td>
-                <td>{{ job.job.job_title }}</td>
-                <td>{{ job.job.job_type }}</td>
-                <td>{{ job.job.company_name }}</td>
-                <td style = "text-align:center;"><a href="{{ job.job.applied_link }}" class="link-button" target="_blank" rel="noopener noreferrer">View</a></td>
-                <td>{{ job.job.job_posted_date }}</td>
+                <td>{{ job.job_application_date }}</td>
+                <td>{{ job.job_title }}</td>
+                <td>{{ job.job_type }}</td>
+                <td>{{ job.company_name }}</td>
+                <td style = "text-align:center;"><a href="{{ job.applied_link }}" class="link-button" target="_blank" rel="noopener noreferrer">View</a></td>
+                <td>{{ job.job_posted_date }}</td>
             </tr>
             {% endfor %}
             {% else %}
             <tr>
-                <td colspan="9" style="text-align: center;">No data found</td>
+                <td colspan="9" style="text-align: center;">No accepted jobs found</td>
             </tr>
         {% endif %}
         </tbody>

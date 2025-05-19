@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
-from .models import Jobs, AcceptedJobs, RejectedJobs
+from .models import Jobs
 from .forms import JobForm
 
 def home(request):
@@ -26,19 +26,16 @@ def update_status(request, job_id, status):
     job = get_object_or_404(Jobs, id=job_id)
     job.job_status = status
     job.save()
-    if status == 'accepted':
-        AcceptedJobs.objects.get_or_create(job=job)
-    if status == 'rejected':
-        RejectedJobs.objects.get_or_create(job=job)
     return redirect('home')
 
 def accepted_jobs(request):
-    jobs = AcceptedJobs.objects.all()
-    return render(request, 'accepted_jobs.html', {'jobs': jobs})
+    accepted_jobs = Jobs.objects.filter(job_status = 'accepted')
+    context = {'jobs': accepted_jobs}
+    return render(request, 'accepted_jobs.html', context)
 
 def rejected_jobs(request):
-    jobs = RejectedJobs.objects.all()
-    return render(request, 'rejected_jobs.html', {'jobs': jobs})   
+    jobs = Jobs.objects.filter(job_status='rejected')
+    return render(request, 'rejected_jobs.html', {'jobs': jobs})
 
 def none(request):
-    return render(request, 'none.html'); 
+    return render(request, 'none.html');

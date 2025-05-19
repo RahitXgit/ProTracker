@@ -12,7 +12,8 @@ class JobForm(forms.ModelForm):
         }
         optional_fields = ['job_posted_date']
         
-        def __init__(self, *args, **kwargs):
+       
+    def __init__(self, *args, **kwargs):
             super(JobForm, self).__init__(*args, **kwargs)
             for field in self.Meta.optional_fields:
-                self.fields[field].required = False
+                self.fields[field].required = False    

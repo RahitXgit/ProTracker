@@ -31,11 +31,4 @@ class Jobs(models.Model):
     def __str__(self):
         return self.company_name
 
-class AcceptedJobs(models.Model):
-    job = models.OneToOneField(Jobs, on_delete=models.CASCADE, primary_key=True, limit_choices_to={'job_status': 'accepted'})
-
-    def __str__(self):
-        return f"{self.job.company_name} - {self.job.job_title}"
-    
-class RejectedJobs(models.Model):
-    job = models.OneToOneField(Jobs, on_delete=models.CASCADE, primary_key=True, limit_choices_to={'job_status': 'rejected'})
+    # job = models.OneToOneField(Jobs, on_delete=models.CASCADE, primary_key=True, limit_choices_to={'job_status': 'rejected'})

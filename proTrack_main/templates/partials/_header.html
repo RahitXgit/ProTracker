@@ -7,46 +7,64 @@
     <li><a href="{% url 'rejected_jobs' %}">Rejected</a></li>
   </ul>
 </nav>
+
 <style>
+  /* Navbar styling */
   nav {
     background-color: #495E57;
-    position: absolute; /* Position the navbar absolutely */
-    top: 0; /* Align to the top */
-    left: 0; /* Align to the left */
-    width: 100%; /* Make it full width */
+    position: fixed; /* Fix the navbar at the top */
+    top: 0;
+    left: 0;
+    width: 100%;
     padding: 10px 0; /* Add some padding */
-}
+    z-index: 1000; /* Ensure it stays above other content */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+  }
 
-nav ul {
+  /* Remove default list styling */
+  nav ul {
     list-style: none;
-    font-size: 1.5rem;
     text-align: center;
-    padding-inline-start: 0rem;
-    margin: 0; /* Remove default margin */
-}
+    padding: 0;
+    margin: 0;
+  }
 
-nav ul li {
+  /* Display list items inline */
+  nav ul li {
     display: inline-block;
-    margin: 0.5rem;
-}
+    margin: 0 15px; /* Add horizontal spacing between items */
+  }
 
-nav ul a {
+  /* Link styling */
+  nav ul a {
     color: #EDEFEE;
     text-decoration: none;
-}
+    font-size: 1rem; /* Set a reasonable font size */
+    font-weight: 500; /* Slightly bold */
+    transition: color 0.3s ease; /* Smooth color transition */
+  }
 
-nav ul a:active {
-    text-decoration: underline;
-}
+  /* Active link styling */
+  nav ul a:active {
+    color: #F4CE14; /* Highlight color for active link */
+  }
 
-nav ul a:hover {
+  /* Hover effect */
+  nav ul a:hover {
+    color: #F4CE14; /* Change color on hover */
     text-decoration: underline;
-    text-decoration-thickness: 0.1rem;
-}
-  </style>
-{% comment %} 
-path('add-job/', add_job, name='add_job'),
-    path('delete-job/<int:job_id>/', delete_job, name='delete_job'),
-    path('update-status/<int:job_id>/<str:status>/', update_status, name='update_status'),
-    path('accepted-jobs/', accepted_jobs, name='accepted_jobs'),
-    path('rejected-jobs/', rejected_jobs, name='rejected_jobs'), {% endcomment %}
+    text-decoration-thickness: 2px; /* Thicker underline */
+  }
+
+  /* Responsive design for smaller screens */
+  @media (max-width: 600px) {
+    nav ul li {
+      display: block; /* Stack items vertically on small screens */
+      margin: 10px 0; /* Add vertical spacing */
+    }
+
+    nav ul a {
+      font-size: 0.9rem; /* Slightly smaller font for mobile */
+    }
+  }
+</style>
